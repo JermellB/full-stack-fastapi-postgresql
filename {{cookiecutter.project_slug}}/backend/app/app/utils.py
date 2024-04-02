@@ -14,8 +14,9 @@ def send_email(
     email_to: str,
     subject_template: str = "",
     html_template: str = "",
-    environment: Dict[str, Any] = {},
+    environment: Optional[Dict[str, Any]] = None,
 ) -> None:
+    environment = {} if environment is None else environment
     assert settings.EMAILS_ENABLED, "no provided configuration for email variables"
     message = emails.Message(
         subject=JinjaTemplate(subject_template),
